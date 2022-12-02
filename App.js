@@ -38,63 +38,51 @@ import React, {useState} from 'react';
         Done
 
   3. NOT ALL PROPERTIES ARE SUPPORT BY NATIVE DRIVERS
+     marginLeft , value.getLayout() is not supported
+     transform is supported
+
+  4. PanResponser for gestures
 
 
 */
 const App = () => {
-  const [value, setValue] = useState(
-    new Animated.ValueXY({
-      x: 0,
-      y: 0,
-    }),
-  );
 
-  const leftValue = useState( new Animated.Value(0))[0];
+  const leftValue = useState(new Animated.Value(0))[0];
 
-  const opacityValue = useState( new Animated.Value(0))[0];
+  const opacityValue = useState(new Animated.Value(0))[0];
+
 
   const moveBall = () => {
-    // Animated.timing(value, {
-    //   toValue: {x: 100, y: 100},
-    //   duration: 1000,
-    //   useNativeDriver: false,
-    // }).start();
-
-    Animated.spring(value, {
-      toValue: {x: 100, y: 100},
-      // duration: 1000,
-      useNativeDriver: false,
+    Animated.timing(leftValue, {
+      toValue: 100,
+      duration: 1000,
+      useNativeDriver: true,
     }).start();
+  };
 
-    Animated.timing(leftValue,{
-      toValue:100,
-      duration:1000,
-      useNativeDriver: false,
-    }).start();
-
-    Animated.timing(opacityValue,{
-      toValue:1,
-      duration:1000,
+  const fadeInBall = () =>{
+    Animated.timing(opacityValue, {
+      toValue: 1,
+      duration: 1000,
       useNativeDriver: true,
     }).start();
 
-  };
+  }
+
+  const fadeOutBall = () =>{
+    Animated.timing(opacityValue, {
+      toValue: 0,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+
+  }
 
   return (
     <View style={styles.container}>
-      <Animated.View style={value.getLayout()}>
-        <View
-          style={{
-            width: 100,
-            height: 100,
-            borderRadius: 100 / 2,
-            backgroundColor: 'red',
-          }}></View>
-      </Animated.View>
       <Pressable onPress={moveBall} style={{margin: 20}}>
         <Text style={styles.textM}>Tap Me!!</Text>
       </Pressable>
-
       <Animated.View
         style={[
           {
@@ -102,10 +90,25 @@ const App = () => {
             height: 100,
             borderRadius: 100 / 2,
             backgroundColor: 'red',
-            // marginLeft:leftValue,
             opacity:opacityValue,
+            transform: [
+              {
+                translateX: leftValue,
+              },
+              {
+                translateY: leftValue,
+              },
+            ],
           },
         ]}></Animated.View>
+      <View style={{flexDirection:'row'}}>
+        <Pressable onPress={fadeInBall} style={{margin: 20}}>
+          <Text style={styles.textM}>Fade In</Text>
+        </Pressable>
+        <Pressable onPress={fadeOutBall} style={{margin: 20}}>
+          <Text style={styles.textM}>Fade out</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
