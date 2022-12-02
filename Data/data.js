@@ -1,0 +1,73 @@
+export default [
+    {
+        key: `1`,
+        image: `https://images.unsplash.com/photo-1536104968055-4d61aa56f46a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80`,
+        name: 'Hemanth Kumar',
+        jobTitle: 'Developer',
+        email: 'hemanthkumar@developer.com',
+    },
+    {
+        key: `2`,
+        image: `https://images.unsplash.com/photo-1549692520-acc6669e2f0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80`,
+        name: 'Jhon',
+        jobTitle: 'UI Designer',
+        email: 'jhon@developer.com',
+    },
+    {
+        key: `3`,
+        image: `https://images.unsplash.com/photo-1528901166007-3784c7dd3653?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80`,
+        name: 'Ravi',
+        jobTitle: 'Service Now Developer',
+        email: 'ravi@developer.com',
+    },
+    {
+        key: `4`,
+        image: `https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80`,
+        name: 'Karthik',
+        jobTitle: 'Backend Developer',
+        email: 'karthik@developer.com',
+    },
+    {
+        key: `5`,
+        image: `https://images.unsplash.com/photo-1549692520-acc6669e2f0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80`,
+        name: 'Jhon',
+        jobTitle: 'UI Designer',
+        email: 'jhon@developer.com',
+    },
+    {
+        key: `6`,
+        image: `https://images.unsplash.com/photo-1536104968055-4d61aa56f46a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80`,
+        name: 'Hemanth Kumar',
+        jobTitle: 'Developer',
+        email: 'hemanthkumar@developer.com',
+    },
+    {
+        key: `7`,
+        image: `https://images.unsplash.com/photo-1549692520-acc6669e2f0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80`,
+        name: 'Jhon',
+        jobTitle: 'UI Designer',
+        email: 'jhon@developer.com',
+    },
+    {
+        key: `8`,
+        image: `https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80`,
+        name: 'Karthik',
+        jobTitle: 'Backend Developer',
+        email: 'karthik@developer.com',
+    },
+    {
+        key: `9`,
+        image: `https://images.unsplash.com/photo-1549692520-acc6669e2f0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80`,
+        name: 'Jhon',
+        jobTitle: 'UI Designer',
+        email: 'jhon@developer.com',
+    },
+    {
+        key: `10`,
+        image: `https://images.unsplash.com/photo-1528901166007-3784c7dd3653?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80`,
+        name: 'Ravi',
+        jobTitle: 'Service Now Developer',
+        email: 'ravi@developer.com',
+    },
+   
+]
