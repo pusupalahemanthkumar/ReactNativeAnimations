@@ -9,89 +9,75 @@ import {
   Dimensions,
   StyleSheet,
   TouchableOpacity,
-  Easing,
-  SafeAreaViewBase,
-  SafeAreaView,
 } from 'react-native';
 const {width, height} = Dimensions.get('screen');
-import DATA from './Data/data';
 
-// const DATA = [...Array(30).keys()].map((_, i) => {
-//   return {
-//     key: `${i}`,
-//     image: `https://images.unsplash.com/photo-1664574654529-b60630f33fdb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80`,
-//     name: 'Hemanth',
-//     jobTitle: 'Developer',
-//     email: 'test@gmail.com',
-//   };
-// });
+const data = [
+  'https://cdn.dribbble.com/users/3281732/screenshots/11192830/media/7690704fa8f0566d572a085637dd1eee.jpg?compress=1&resize=1200x1200',
+  'https://cdn.dribbble.com/users/3281732/screenshots/13130602/media/592ccac0a949b39f058a297fd1faa38e.jpg?compress=1&resize=1200x1200',
+  'https://cdn.dribbble.com/users/3281732/screenshots/9165292/media/ccbfbce040e1941972dbc6a378c35e98.jpg?compress=1&resize=1200x1200',
+  'https://cdn.dribbble.com/users/3281732/screenshots/11205211/media/44c854b0a6e381340fbefe276e03e8e4.jpg?compress=1&resize=1200x1200',
+  'https://cdn.dribbble.com/users/3281732/screenshots/7003560/media/48d5ac3503d204751a2890ba82cc42ad.jpg?compress=1&resize=1200x1200',
+  'https://cdn.dribbble.com/users/3281732/screenshots/6727912/samji_illustrator.jpeg?compress=1&resize=1200x1200',
+  'https://cdn.dribbble.com/users/3281732/screenshots/13661330/media/1d9d3cd01504fa3f5ae5016e5ec3a313.jpg?compress=1&resize=1200x1200',
+];
 
-const BG_IMG =
-  'https://images.unsplash.com/photo-1669920704206-682bd4c2934e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80';
-const SPACING = 20;
-const AVATAR_SIZE = 80;
-const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
+const imageW = width * 0.7;
+const imageH = imageW * 1.54;
 
 const App = () => {
-  const scrollY = React.useRef(new Animated.Value(0)).current;
+  const scrollX = React.useRef(new Animated.Value(0)).current;
   return (
     <View style={styles.container}>
-      <Image
-        source={{uri: BG_IMG}}
-        style={StyleSheet.absoluteFillObject}
-        blurRadius={80}
-      />
-      <Animated.FlatList
-        data={DATA}
-        onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {y: scrollY}}}],
-          {useNativeDriver: true},
-        )}
-        keyExtractor={item => item.key}
-        contentContainerStyle={{
-          padding: SPACING,
-          paddingTop: StatusBar.currentHeight || 42,
-        }}
-        renderItem={({item, index}) => {
+      <StatusBar hidden />
+      <View style={StyleSheet.absoluteFillObject}>
+        {data.map((image, index) => {
           const inputRange = [
-            -1,
-            0,
-            ITEM_SIZE * index,
-            ITEM_SIZE * (index + 2),
+            (index - 1) * width, // next
+            index * width, // cur
+            (index + 1) * width, // prev
           ];
-
-          const opacityInputRange = [
-            -1,
-            0,
-            ITEM_SIZE * index,
-            ITEM_SIZE * (index + 1),
-          ];
-
-          const scale = scrollY.interpolate({
+          const opacity = scrollX.interpolate({
             inputRange,
-            outputRange: [1, 1, 1, 0],
-          });
-
-          const opacity = scrollY.interpolate({
-            inputRange: opacityInputRange,
-            outputRange: [1, 1, 1, 0],
+            outputRange: [0, 1, 0],
           });
           return (
-            <Animated.View
-              style={[
-                styles.itemContainer,
-                {
-                  transform: [{scale}],
-                  opacity: opacity,
-                },
-              ]}>
-              <Image source={{uri: item.image}} style={styles.avator} />
-              <View>
-                <Text style={styles.name}>{item.name}</Text>
-                <Text style={styles.jobTitle}>{item.jobTitle}</Text>
-                <Text style={styles.email}>{item.email}</Text>
-              </View>
-            </Animated.View>
+            <Animated.Image
+              key={`image- ${index}`}
+              source={{uri: image}}
+              style={[StyleSheet.absoluteFillObject, {opacity}]}
+              blurRadius={50}
+            />
+          );
+        })}
+      </View>
+      <Animated.FlatList
+        data={data}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {x: scrollX}}}],
+          {useNativeDriver: true},
+        )}
+        horizontal
+        pagingEnabled
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={({item, index}) => {
+          return (
+            <View
+              style={{
+                width: width,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Image
+                source={{uri: item}}
+                style={{
+                  width: imageW,
+                  height: imageH,
+                  resizeMode: 'cover',
+                  borderRadius: 16,
+                }}
+              />
+            </View>
           );
         }}
       />
@@ -104,40 +90,6 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    padding: SPACING,
-    marginBottom: SPACING,
-    backgroundColor: 'rgba(255,255,255,0.8)',
-    borderRadius: 12,
-    // elevation: 3, // Android
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
-  },
-  avator: {
-    width: AVATAR_SIZE,
-    height: AVATAR_SIZE,
-    borderRadius: AVATAR_SIZE,
-    marginRight: SPACING / 2,
-  },
-  name: {
-    fontSize: 20,
-    fontWeight: '700',
-  },
-  jobTitle: {
-    fontSize: 16,
-    opacity: 0.8,
-  },
-  email: {
-    fontSize: 16,
-    // opacity: 0.8,
-    color: '#0099cc',
+    backgroundColor: '#000',
   },
 });
